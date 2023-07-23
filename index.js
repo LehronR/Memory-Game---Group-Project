@@ -1,16 +1,15 @@
 import { superMario, avengers, defaultDeck } from "./gameData.js";
-
+// Object used for selecting different themes
 let cardTheme = {
   basic: defaultDeck,
   mario: superMario,
   avengers: avengers
 };
-
+// Global variables
 let currentTheme = cardTheme.basic;
 let moveCount = 0;
 let setImgsArr = [];
-
-// let shuffledDeck = shuffleImgs(cardTheme);
+// HTML elements used for data manipulation
 const cardDeck = Array.from(document.querySelectorAll("#cardDeck > div"));
 const moveCounter = document.getElementById("moveCount");
 const newGame = document.getElementById("newGame");
@@ -18,36 +17,25 @@ const theme = document.querySelector("select");
 
 // Start new game
 function startNewGame() {
+  // Reshuffle deck once a new game is started
   let shuffledDeck = shuffleImgs(currentTheme);
-  console.log(shuffledDeck);
-
+  // Capture images for new shuffled deck
   let imgArray = Array.from(document.querySelectorAll("div>img"));
-  console.log(imgArray);
-
+  // Reset move counter
   moveCount = 0;
   moveCounter.textContent = moveCount;
-
+  // Reset classes on card elements
   cardDeck.forEach((card) => {
     card.classList.remove("front", "match");
-
+    // Reset cards to initial state with back class
     if (!card.classList.contains("back")) {
       card.classList.add("back");
     }
-
-    if (imgArray.length > 0) {
-      imgArray.forEach((img) => {
-        img.classList.remove("show");
-        img.classList.add("hide");
-      });
-    }
-
+    // If new game started after initial load, remove images from card elements
     if (card.children.length > 0) {
       card.removeChild(document.querySelector("div > img"));
     }
-
-    console.log(card.children.length);
   });
-
   setImgsToCards(cardDeck);
 }
 
@@ -86,7 +74,6 @@ function shuffleImgs(currentTheme) {
 }
 // Randomly set current game cards images
 function setImgsToCards(cardDeck) {
-  //   let shuffledImagesArr = shuffleImgs(cardTheme);
   let currentImgs = shuffleImgs(currentTheme);
   let index = 0;
 
@@ -98,7 +85,7 @@ function setImgsToCards(cardDeck) {
     newImg.setAttribute("src", currentImgs[index]);
     newImg.classList.add("hide");
     card.appendChild(newImg);
-
+    // Used to capture current images being used
     setImgsArr.push(newImg);
     index++;
   });
@@ -140,12 +127,12 @@ function compareCards(flippedCards) {
         secondCard.children[0].classList.add("hide");
 
         console.log(firstCard, secondCard);
-      }, 1000);
+      }, 500);
 
   setTimeout(() => {
     hasPlayerWon();
-  }, 1000);
-
+  }, 500);
+  // Update move count
   moveCount++;
   moveCounter.textContent = moveCount;
 }
@@ -154,7 +141,7 @@ function checkFlippedCards() {
   let flippedCards = cardDeck.filter((card) => {
     return card.classList.contains("front");
   });
-
+  // Check number of flip cards
   flippedCards.length === 2
     ? compareCards(flippedCards)
     : console.log("cards flipped: " + flippedCards.length);
@@ -171,7 +158,7 @@ function hasPlayerWon() {
 function changeTheme() {
   let chosenTheme = theme.options[theme.selectedIndex].text;
   console.log(chosenTheme);
-
+  // Used to handle theme changes
   switch (chosenTheme) {
     case "Super Mario":
       currentTheme = cardTheme.mario;
@@ -195,18 +182,8 @@ function changeTheme() {
       });
       break;
   }
-
-  console.log(currentTheme);
-
   startNewGame();
 }
-
-// function updateTheme(newTheme) {
-//   cardDeck.forEach((card) => {
-//     card.children[0].setAttribute("src", newTheme[index]);
-//   });
-// }
-
 // Event Listeners
 cardDeck.map((card) => {
   card.addEventListener("click", flipCard);
