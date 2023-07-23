@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>card game</title>
+  </head>
+  <body>
+    <main>
+      <section>
+        <h1>Memory Match Game</h1>
+        <h3>Moves Made: <span id="moveCount">0</span></h3>
+        <div id="cardDeck">
+          <div id="0" class="card back"></div>
+          <div id="1" class="card back"></div>
+          <div id="2" class="card back"></div>
+          <div id="3" class="card back"></div>
+          <div id="4" class="card back"></div>
+          <div id="5" class="card back"></div>
+          <div id="6" class="card back"></div>
+          <div id="7" class="card back"></div>
+          <div id="8" class="card back"></div>
+          <div id="9" class="card back"></div>
+          <div id="10" class="card back"></div>
+          <div id="11" class="card back"></div>
+        </div>
+      </section>
+      <div>
+        <select>
+          <option value="">Basic</option>
+          <option value="mario">Super Mario</option>
+          <option value="avengers">Avengers</option>
+        </select>
+        <button id="newGame">Start New Game</button>
+      </div>
+    </main>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
