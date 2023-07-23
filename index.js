@@ -175,12 +175,24 @@ function changeTheme() {
   switch (chosenTheme) {
     case "Super Mario":
       currentTheme = cardTheme.mario;
+      cardDeck.forEach((card) => {
+        card.classList.remove("avengers", "basic");
+        card.classList.add("mario");
+      });
       break;
     case "Avengers":
       currentTheme = cardTheme.avengers;
+      cardDeck.forEach((card) => {
+        card.classList.remove("mario", "basic");
+        card.classList.add("avengers");
+      });
       break;
     case "Basic":
       currentTheme = cardTheme.basic;
+      cardDeck.forEach((card) => {
+        card.classList.remove("avengers", "mario");
+        card.classList.add("basic");
+      });
       break;
   }
 
